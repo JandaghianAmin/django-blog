@@ -1,12 +1,14 @@
 from django.db import models
+from django.contrib.auth import get_user_model
 
-# Create your models here.
+
+user = get_user_model()
 
 class Post(models.Model):
     """
     This is class to define post for app
     """
-    author = models.ForeignKey(User,on_delete=models.CASCADE)
+    author = models.ForeignKey(user,on_delete=models.CASCADE)
     image = models.ImageField(null=True,blank=True)
     title = models.CharField(max_length=250)
     content = models.TextField()

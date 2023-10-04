@@ -45,7 +45,7 @@ class User(AbstractBaseUser,PermissionsMixin):
 
     objects = UserManager()
     def __str__(self):
-        return self.email
+        return str(self.email)
 
 
 class Profile(models.Model):
@@ -59,7 +59,7 @@ class Profile(models.Model):
     updated_date =  models.DateField(auto_now=True)
 
     def __str__(self):
-        return self.user.email
+        return str(self.user.email)
     
 @receiver(post_save,sender= User)
 def save_profile(sender, instance,created, **kwargs):

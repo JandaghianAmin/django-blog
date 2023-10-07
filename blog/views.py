@@ -1,8 +1,9 @@
 # from django.shortcuts import render
 from typing import Any
 from django.db import models
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
 from .models import Post
+from .forms import PostForm
 
 class PostListView(ListView):
 
@@ -19,12 +20,15 @@ class PostListView(ListView):
         return template_name
     
 
-
-
 class PostDetailView(DetailView):
     model = Post
     template_name = 'blog/post_detail.html'  # Replace with your template name
     context_object_name = 'post'
 
+class CreatePostView(CreateView):
+    template_name = "create_post.html"
+    form_class = PostForm
+    success_url = "/blog/posts/"
 
-    
+    def form_valid(self, form):
+        return super().form_valid(form)    

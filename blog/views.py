@@ -26,7 +26,7 @@ class PostDetailView(DetailView):
     context_object_name = 'post'
 
 class CreatePostView(CreateView):
-    template_name = "create_post.html"
+    template_name = "blog/create_post.html"
     form_class = PostForm
     success_url = "/blog/posts/"
 

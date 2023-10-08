@@ -1,7 +1,7 @@
 # from django.shortcuts import render
 from typing import Any
 from django.db import models
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from .models import Post
 from .forms import PostForm
 
@@ -26,10 +26,19 @@ class PostDetailView(DetailView):
     context_object_name = 'post'
 
 class CreatePostView(CreateView):
-    template_name = "blog/create_post.html"
+    template_name = "blog/post_form.html"
     form_class = PostForm
     success_url = "/blog/posts/"
 
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)    
+    
+class PostUpdateView(UpdateView):
+    model = Post
+    form_class = PostForm
+    success_url = "/blog/posts/"
+
+class PostDeleteView(DeleteView):
+    model = Post
+    success_url = "/blog/posts/"
